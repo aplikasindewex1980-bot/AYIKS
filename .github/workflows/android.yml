@@ -14,11 +14,11 @@ jobs:
       # Checkout source code
       - uses: actions/checkout@v3
 
-      # Setup Java (JDK 17)
-      - name: Set up JDK 17
+      # Setup Java (JDK 11 lebih aman untuk AGP lama)
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '11'
           distribution: 'temurin'
           cache: gradle
 
@@ -26,8 +26,17 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      # Clean project (opsional, biar build fresh)
+      - name: Clean project
+        run: ./gradlew clean
+
       # Build APK release
       - name: Build with Gradle
         run: ./gradlew assembleRelease
 
-      # Upload APK (pakai versi terbaru v4
+      # Upload APK hasil build
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: app/build/outputs/apk/release/*.apk
