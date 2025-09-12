@@ -23,9 +23,12 @@ jobs:
           java-version: 17
           cache: gradle
 
-      # 3. Grant execute permission untuk gradlew
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      # 3. Ensure gradlew is executable & check version
+      - name: Prepare Gradle Wrapper
+        run: |
+          sed -i 's/\r$//' gradlew      # convert CRLF → LF
+          chmod +x gradlew
+          ./gradlew --version
 
       # 4. Cache Gradle dependencies
       - name: Cache Gradle packages
@@ -40,7 +43,7 @@ jobs:
 
       # 5. Build APK debug
       - name: Build with Gradle
-        run: ./gradlew assembleDebug
+        run: ./gradlew --no-daemon assembleDebug
 
       # 6. Upload debug APK sebagai artifact
       - name: Upload APK artifact
