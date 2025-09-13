@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace "com.yourcompany.ayiks"
     compileSdk 34
 
     defaultConfig {
@@ -16,13 +17,24 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file("ayiks-release-key.jks")
+            storePassword "Ayik1980"
+            keyAlias "ayiks"
+            keyPassword "Ayik1980"
+        }
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
+            signingConfig signingConfigs.release
         }
         release {
             minifyEnabled false
-            // signingConfig signingConfigs.release // nanti kalau mau sign
+            shrinkResources false
+            signingConfig signingConfigs.release
         }
     }
 
