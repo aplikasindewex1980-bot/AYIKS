@@ -27,12 +27,7 @@ jobs:
           java-version: 17
           cache: gradle
 
-      # 3️⃣ Pastikan gradlew.bat executable (Windows)
-      - name: Prepare Gradle Wrapper
-        run: |
-          dir gradlew.bat
-
-      # 4️⃣ Cache Gradle dependencies
+      # 3️⃣ Cache Gradle dependencies
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
@@ -43,22 +38,22 @@ jobs:
           restore-keys: |
             gradle-${{ runner.os }}-
 
-      # 5️⃣ Build Debug APK
+      # 4️⃣ Build Debug APK
       - name: Build Debug APK
-        run: gradlew.bat assembleDebug --no-daemon
+        run: .\gradlew.bat assembleDebug --no-daemon
 
-      # 6️⃣ Upload Debug APK artifact
+      # 5️⃣ Upload Debug APK artifact
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: AYIKS-debug-apk
           path: app\build\outputs\apk\debug\*.apk
 
-      # 7️⃣ Build Release APK
+      # 6️⃣ Build Release APK
       - name: Build Release APK
-        run: gradlew.bat assembleRelease --no-daemon
+        run: .\gradlew.bat assembleRelease --no-daemon
 
-      # 8️⃣ Upload Release APK artifact
+      # 7️⃣ Upload Release APK artifact
       - name: Upload Release APK
         uses: actions/upload-artifact@v4
         with:
