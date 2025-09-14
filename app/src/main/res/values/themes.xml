@@ -1,1 +1,3 @@
-<resources><style name="Theme.AYIKS" parent="Theme.MaterialComponents.DayNight.DarkActionBar"/></resources>
+<resources>
+    <style name="Theme.AYIKS" parent="Theme.MaterialComponents.DayNight.DarkActionBar"/>
+</resources>
