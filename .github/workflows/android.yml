@@ -38,4 +38,17 @@ jobs:
           restore-keys: |
             gradle-${{ runner.os }}-
 
-      #
+      # 4️⃣ Build Debug APK
+      - name: Build Debug APK
+        run: .\gradlew assembleDebug
+
+      # 5️⃣ Build Release APK (optional, jika signing siap)
+      - name: Build Release APK
+        run: .\gradlew assembleRelease
+
+      # 6️⃣ Upload all APKs as artifact
+      - name: Upload APKs
+        uses: actions/upload-artifact@v3
+        with:
+          name: AYIKS-APK
+          path: app\build\outputs\apk\**\*.apk
