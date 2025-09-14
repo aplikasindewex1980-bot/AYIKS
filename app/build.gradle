@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace "com.ayiks.app"
+    namespace "com.ayiks.app" // <- ini sekarang sesuai build.gradle
     compileSdk 33
 
     defaultConfig {
